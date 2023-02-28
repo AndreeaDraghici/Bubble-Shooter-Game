@@ -325,42 +325,48 @@ public class Game implements ActionListener {
      * @return list of the neighbouring bubbles
      */
     private ArrayList<Bubble> getNeighbours(int row, int col) {
-        ArrayList<Bubble> neighbours = new ArrayList<Bubble>();
-        //LEFT
-        if (col > 0) neighbours.add(bubbles.get(row).get(col - 1));
-        //RIGHT
-        if (col < (bubbles.get(row).isFull() ? COL_COUNT_FULL : COL_COUNT) - 1) {
-            neighbours.add(bubbles.get(row).get(col + 1));
+        try {
+
+            ArrayList<Bubble> neighbours = new ArrayList<Bubble>();
+            //LEFT
+            if (col > 0) neighbours.add(bubbles.get(row).get(col - 1));
+            //RIGHT
+            if (col < (bubbles.get(row).isFull() ? COL_COUNT_FULL : COL_COUNT) - 1) {
+                neighbours.add(bubbles.get(row).get(col + 1));
+            }
+            //UPPER LEFT
+            if (bubbles.get(row).isFull() && col > 0 && row > 0) {
+                neighbours.add(bubbles.get(row - 1).get(col - 1));
+            }
+            if (!bubbles.get(row).isFull() && row > 0) {
+                neighbours.add(bubbles.get(row - 1).get(col));
+            }
+            //UPPER RIGHT
+            if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row > 0) {
+                neighbours.add(bubbles.get(row - 1).get(col));
+            }
+            if (!bubbles.get(row).isFull() && row > 0) {
+                neighbours.add(bubbles.get(row - 1).get(col + 1));
+            }
+            //LOWER LEFT
+            if (bubbles.get(row).isFull() && col > 0 && row < ROW_COUNT - 1) {
+                neighbours.add(bubbles.get(row + 1).get(col - 1));
+            }
+            if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
+                neighbours.add(bubbles.get(row + 1).get(col));
+            }
+            //LOWER RIGHT
+            if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row < ROW_COUNT - 1) {
+                neighbours.add(bubbles.get(row + 1).get(col));
+            }
+            if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
+                neighbours.add(bubbles.get(row + 1).get(col + 1));
+            }
+            return neighbours;
+        } catch (Exception e) {
+            System.err.println("Could not return the neighbors due to: " + e.getMessage());
         }
-        //UPPER LEFT
-        if (bubbles.get(row).isFull() && col > 0 && row > 0) {
-            neighbours.add(bubbles.get(row - 1).get(col - 1));
-        }
-        if (!bubbles.get(row).isFull() && row > 0) {
-            neighbours.add(bubbles.get(row - 1).get(col));
-        }
-        //UPPER RIGHT
-        if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row > 0) {
-            neighbours.add(bubbles.get(row - 1).get(col));
-        }
-        if (!bubbles.get(row).isFull() && row > 0) {
-            neighbours.add(bubbles.get(row - 1).get(col + 1));
-        }
-        //LOWER LEFT
-        if (bubbles.get(row).isFull() && col > 0 && row < ROW_COUNT - 1) {
-            neighbours.add(bubbles.get(row + 1).get(col - 1));
-        }
-        if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
-            neighbours.add(bubbles.get(row + 1).get(col));
-        }
-        //LOWER RIGHT
-        if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row < ROW_COUNT - 1) {
-            neighbours.add(bubbles.get(row + 1).get(col));
-        }
-        if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
-            neighbours.add(bubbles.get(row + 1).get(col + 1));
-        }
-        return neighbours;
+        return null;
     }
 
     /**
@@ -452,7 +458,7 @@ public class Game implements ActionListener {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Failed to mark color: " + e.getMessage());
+            throw new RuntimeException("Failed to mark color due to: " + e.getMessage());
         }
 
     }
@@ -463,25 +469,33 @@ public class Game implements ActionListener {
      * @return number of the marked bubbles
      */
     private int countMarked() {
-        int ret = 0;
-        for (RowList r : bubbles) {
-            for (Bubble b : r) {
-                if (b.isMarked() && b.isVisible()) {
-                    ret++;
+        try {
+            int ret = 0;
+            for (RowList r : bubbles) {
+                for (Bubble b : r) {
+                    if (b.isMarked() && b.isVisible()) {
+                        ret++;
+                    }
                 }
             }
+            return ret;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to count marked bubble due to: " + e.getMessage());
         }
-        return ret;
     }
 
     /**
      * unmarks all bubbles
      */
     private void unMarkAll() {
-        for (RowList r : bubbles) {
-            for (Bubble b : r) {
-                b.unmark();
+        try {
+            for (RowList r : bubbles) {
+                for (Bubble b : r) {
+                    b.unmark();
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to unmarks bubbles due to: " + e.getMessage());
         }
     }
 
@@ -489,10 +503,14 @@ public class Game implements ActionListener {
      * marks all bubbles
      */
     private void markAll() {
-        for (RowList r : bubbles) {
-            for (Bubble b : r) {
-                b.mark();
+        try {
+            for (RowList r : bubbles) {
+                for (Bubble b : r) {
+                    b.mark();
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to mark bubbles due to: " + e.getMessage());
         }
     }
 
@@ -500,12 +518,16 @@ public class Game implements ActionListener {
      * removes all marked bubbles
      */
     private void removeMarked() {
-        for (RowList r : bubbles) {
-            for (Bubble b : r) {
-                if (b.isMarked()) {
-                    b.setVisible(false);
+        try {
+            for (RowList r : bubbles) {
+                for (Bubble b : r) {
+                    if (b.isMarked()) {
+                        b.setVisible(false);
+                    }
                 }
             }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to remove marked bubbles due to: " + e.getMessage());
         }
     }
 
