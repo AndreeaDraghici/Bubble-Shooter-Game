@@ -69,9 +69,9 @@ public class Canvas extends JPanel implements
 		
 		//blured background 
 		lPane = new JLayeredPane();
-		lPane.setBackground(new Color(241, 202, 144, 255));
+		lPane.setBackground(new Color(0, 255, 184, 255));
 		JPanel blur = new JPanel();
-		blur.setBackground(new Color(241, 202, 144, 255));
+		blur.setBackground(new Color(0, 250, 209, 255));
 		
 		blur.setBounds(0,0,Constants.FIELD_SIZE_X,Constants.FIELD_SIZE_Y);
 		
@@ -91,7 +91,7 @@ public class Canvas extends JPanel implements
 		
 		// highscores table 
 		highscoreTable = new JTable();
-		highscoreTable.setBackground(new Color(51, 0, 204,70)); //highscore table background
+		highscoreTable.setBackground(new Color(250, 2, 33,70)); //highscore table background
 		
 		highscoreTable.setFillsViewportHeight(true);
 		highscoreTable.setModel(highscores);

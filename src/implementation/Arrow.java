@@ -11,8 +11,8 @@ public class Arrow{
 
 	private Point p;
 
-	private static final int TIP_LENGTH = 20;
-	private static final int LENGTH = 80;
+	private static final int TIP_LENGTH = 50;
+	private static final int LENGTH = 100;
 
 	public Arrow(){
 		p = new Point(Constants.FIELD_SIZE_X/2,0);
@@ -20,7 +20,7 @@ public class Arrow{
 
     public void paintComponent(Graphics2D g2d, Point base) {
 
-    	g2d.setColor(Color.blue);
+    	g2d.setColor(Color.MAGENTA);
     	Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
     	int x = mouseLoc.x-base.x;
         int y = mouseLoc.y-base.y;

@@ -148,7 +148,7 @@ public class Bubble {
 		case 0:
 			return Color.green;
 		case 1:
-			return Color.WHITE;
+			return Color.pink;
 		case 2:
 			return Color.yellow;
 		case 3:

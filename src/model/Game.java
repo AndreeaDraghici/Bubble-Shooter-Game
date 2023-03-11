@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Objects;
 
 import javax.swing.Timer;
 
@@ -21,12 +22,12 @@ public class Game implements ActionListener {
     /**
      * the container of the bubbles on the screen
      */
-    private ArrayList<RowList> bubbles;
+    private final ArrayList<RowList> bubbles;
 
     /**
      * the container of the 4 bubbles waiting to be shot
      */
-    private LinkedList<Bubble> upcoming;
+    private final LinkedList<Bubble> upcoming;
 
     /**
      * the bubble that currently moves on the screen
@@ -36,12 +37,12 @@ public class Game implements ActionListener {
     /**
      * number of the initial rows
      */
-    private int initial_rows;
+    private final int initial_rows;
 
     /**
      * number of the possible colors of bubbles
      */
-    private int colors;
+    private final int colors;
 
     /**
      * timer object for the linear movement of the moving bubble
@@ -51,7 +52,7 @@ public class Game implements ActionListener {
     /**
      * the canvas object where the bubbles should be painted
      */
-    private Canvas canvas;
+    private final Canvas canvas;
 
     /**
      * number of the unsuccessful (no bubbles disappeared) shots.
@@ -128,9 +129,9 @@ public class Game implements ActionListener {
         shotCount = 0;
         numOfBubbles = 0;
         score = 0;
-        bubbles = new ArrayList<RowList>();
+        bubbles = new ArrayList<>();
         for (int i = 0; i < ROW_COUNT; i++) {
-            RowList r = new RowList((i % 2 == 0 ? true : false));
+            RowList r = new RowList((i % 2 == 0));
             bubbles.add(r);
             for (int j = 0; j < (r.isFull() ? 14 : 13); j++) {
 
@@ -151,7 +152,7 @@ public class Game implements ActionListener {
             }
         }
 
-        upcoming = new LinkedList<Bubble>();
+        upcoming = new LinkedList<>();
         for (int i = 0; i < 4; i++) {
             Bubble b = new Bubble(Bubble.getRandomColor(colors));
             upcoming.add(b);
@@ -211,7 +212,7 @@ public class Game implements ActionListener {
      */
     public void fire(Point mouseLoc, Point panelLoc) {
         boolean movingExists = !(moving_bubble == null);
-        movingExists = (movingExists ? moving_bubble.isMoving() : false);
+        movingExists = (movingExists && moving_bubble.isMoving());
         if (!movingExists) {
             Point dir = new Point(mouseLoc.x - panelLoc.x,
                     mouseLoc.y - panelLoc.y);
@@ -245,7 +246,7 @@ public class Game implements ActionListener {
                 fixBubble(row, col);
             }
             ArrayList<Bubble> neighbours = getNeighbours(row, col);
-            for (Bubble b : neighbours) {
+            for (Bubble b : Objects.requireNonNull(neighbours)) {
                 if (b.isVisible() && BubbleDist(moving_bubble, b) <= 4 + (Bubble.RADIUS + 1) * 2) {
                     fixBubble(row, col);
                     break;
@@ -327,7 +328,7 @@ public class Game implements ActionListener {
     private ArrayList<Bubble> getNeighbours(int row, int col) {
         try {
 
-            ArrayList<Bubble> neighbours = new ArrayList<Bubble>();
+            ArrayList<Bubble> neighbours = new ArrayList<>();
             //LEFT
             if (col > 0) neighbours.add(bubbles.get(row).get(col - 1));
             //RIGHT
@@ -366,7 +367,7 @@ public class Game implements ActionListener {
         } catch (Exception e) {
             System.err.println("Could not return the neighbors due to: " + e.getMessage());
         }
-        return null;
+        return new ArrayList<>();
     }
 
     /**
