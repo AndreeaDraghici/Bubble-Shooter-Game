@@ -146,13 +146,13 @@ public class Bubble {
 		int rnd = (int) (bound<=8 ? Math.random()*bound : Math.random()*8);
 		switch (rnd) {
 		case 0:
-			return Color.blue;
+			return Color.green;
 		case 1:
-			return Color.red;
+			return Color.WHITE;
 		case 2:
 			return Color.yellow;
 		case 3:
-			return Color.green;
+			return Color.red;
 		case 4:
 			return Color.cyan;
 		case 5:
@@ -160,7 +160,7 @@ public class Bubble {
 		case 6:
 			return Color.orange;
 		case 7:
-			return Color.darkGray;
+			return Color.black;
 		default:
 			break;
 		} 

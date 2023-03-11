@@ -78,11 +78,11 @@ public class SettingsPanel extends JPanel {
 		
 		JPanel buttonPanel = new JPanel();
 		newGameButton = new JButton("New game");
-		newGameButton.setActionCommand("NEWGAME");
+		newGameButton.setActionCommand("NEW GAME");
 		newGameButton.addActionListener(mainFrame);
 		
 		stopGameButton = new JButton("Stop game");
-		stopGameButton.setActionCommand("STOPGAME");
+		stopGameButton.setActionCommand("STOP GAME");
 		stopGameButton.addActionListener(mainFrame);
 		buttonPanel.add(newGameButton);
 		buttonPanel.add(stopGameButton);

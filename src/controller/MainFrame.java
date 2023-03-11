@@ -30,7 +30,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		add(rightPanel, BorderLayout.CENTER);
 	
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Bubble Shooter Game");	
+		setTitle("Bubble Shooter by CD :)");
 		setSize(Constants.WINDOW_SIZE_X, Constants.WINDOW_SIZE_Y);
 		setResizable(true);
 		setVisible(true);
@@ -74,11 +74,11 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("NEWGAME")){
+		if(e.getActionCommand().equals("NEW GAME")){
 			leftPanel.newGame(rightPanel.getRow(), rightPanel.getColor());
 			leftPanel.getGame().setMainFrame(this);
 		}
-		else if(e.getActionCommand().equals("STOPGAME")){
+		else if(e.getActionCommand().equals("STOP GAME")){
 			if(leftPanel.getGame() != null){
 				leftPanel.getGame().stop();
 				leftPanel.displayHighscore(0, true);

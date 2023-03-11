@@ -69,9 +69,9 @@ public class Canvas extends JPanel implements
 		
 		//blured background 
 		lPane = new JLayeredPane();
-		lPane.setBackground(new Color(128,128,255,150)); 
+		lPane.setBackground(new Color(241, 202, 144, 255));
 		JPanel blur = new JPanel();
-		blur.setBackground(new Color(128, 128, 255, 120)); 
+		blur.setBackground(new Color(241, 202, 144, 255));
 		
 		blur.setBounds(0,0,Constants.FIELD_SIZE_X,Constants.FIELD_SIZE_Y);
 		
@@ -91,7 +91,7 @@ public class Canvas extends JPanel implements
 		
 		// highscores table 
 		highscoreTable = new JTable();
-		highscoreTable.setBackground(new Color(0,204,153,70)); //highscore table background
+		highscoreTable.setBackground(new Color(51, 0, 204,70)); //highscore table background
 		
 		highscoreTable.setFillsViewportHeight(true);
 		highscoreTable.setModel(highscores);
@@ -258,16 +258,16 @@ public class Canvas extends JPanel implements
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) { /* TODO document why this method is empty */ }
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) { /* TODO document why this method is empty */ }
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) { /* TODO document why this method is empty */ }
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) { /* TODO document why this method is empty */ }
 
 	/**
 	 * {@inheritDoc}
