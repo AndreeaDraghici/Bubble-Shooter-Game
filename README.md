@@ -6,6 +6,7 @@ Team Members: Draghici Andreea and Ciontu Claudia
 ---------------------------
 - Human Computer Interaction Project , 4-th year
 - Java Swing Application 
+- IDEA: IntelliJ IDEA
 
 ## History
 -----------------------------
