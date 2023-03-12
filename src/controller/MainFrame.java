@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame implements ActionListener {
 
-    private SettingsPanel rightPanel;
-    private Canvas leftPanel;
+    private final SettingsPanel rightPanel;
+    private final Canvas leftPanel;
 
     /**
      * constructor, initiates the components, and sets the

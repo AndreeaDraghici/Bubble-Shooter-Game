@@ -133,14 +133,14 @@ public class Game implements ActionListener {
         for (int i = 0; i < ROW_COUNT; i++) {
             RowList r = new RowList((i % 2 == 0));
             bubbles.add(r);
-            for (int j = 0; j < (r.isFull() ? 14 : 13); j++) {
+            for (int j = 0; j < (r.isFullFlag() ? 14 : 13); j++) {
 
                 Bubble b = new Bubble(Bubble.getRandomColor(colors));
                 b.setLocation(
-                        new Point(r.isFull() ?
+                        new Point(r.isFullFlag() ?
                                 j * 2 * (Bubble.RADIUS + 1) :
                                 j * 2 * (Bubble.RADIUS + 1) + (Bubble.RADIUS + 1),
-                                r.isFull() ?
+                                r.isFullFlag() ?
                                         (i / 2) * Constants.ROW_DISTANCE :
                                         (i / 2) * Constants.ROW_DISTANCE + Constants.ROW_DISTANCE / 2));
                 r.add(b);
@@ -237,7 +237,7 @@ public class Game implements ActionListener {
         int row = (currentPosY - Bubble.RADIUS) / (Constants.ROW_DISTANCE / 2);
         int col;
         if (row < ROW_COUNT) {
-            if (bubbles.get(row).isFull()) {
+            if (bubbles.get(row).isFullFlag()) {
                 col = (currentPosX) / ((Bubble.RADIUS + 1) * 2);
             } else {
                 col = (currentPosX - (Bubble.RADIUS + 1)) / ((Bubble.RADIUS + 1) * 2);
@@ -304,11 +304,11 @@ public class Game implements ActionListener {
                         b.getLocation().y + Constants.ROW_DISTANCE / 2));
             }
         }
-        RowList newRow = new RowList(!bubbles.get(0).isFull());
-        for (int i = 0; i < (newRow.isFull() ? 14 : 13); i++) {
+        RowList newRow = new RowList(!bubbles.get(0).isFullFlag());
+        for (int i = 0; i < (newRow.isFullFlag() ? 14 : 13); i++) {
             Bubble b = new Bubble(Bubble.getRandomColor(colors));
             b.setLocation(
-                    new Point((newRow.isFull() ?
+                    new Point((newRow.isFullFlag() ?
                             i * 2 * (Bubble.RADIUS + 1) :
                             i * 2 * (Bubble.RADIUS + 1) + (Bubble.RADIUS + 1)), 0));
             b.setVisible(true);
@@ -332,35 +332,35 @@ public class Game implements ActionListener {
             //LEFT
             if (col > 0) neighbours.add(bubbles.get(row).get(col - 1));
             //RIGHT
-            if (col < (bubbles.get(row).isFull() ? COL_COUNT_FULL : COL_COUNT) - 1) {
+            if (col < (bubbles.get(row).isFullFlag() ? COL_COUNT_FULL : COL_COUNT) - 1) {
                 neighbours.add(bubbles.get(row).get(col + 1));
             }
             //UPPER LEFT
-            if (bubbles.get(row).isFull() && col > 0 && row > 0) {
+            if (bubbles.get(row).isFullFlag() && col > 0 && row > 0) {
                 neighbours.add(bubbles.get(row - 1).get(col - 1));
             }
-            if (!bubbles.get(row).isFull() && row > 0) {
+            if (!bubbles.get(row).isFullFlag() && row > 0) {
                 neighbours.add(bubbles.get(row - 1).get(col));
             }
             //UPPER RIGHT
-            if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row > 0) {
+            if (bubbles.get(row).isFullFlag() && col < COL_COUNT_FULL - 1 && row > 0) {
                 neighbours.add(bubbles.get(row - 1).get(col));
             }
-            if (!bubbles.get(row).isFull() && row > 0) {
+            if (!bubbles.get(row).isFullFlag() && row > 0) {
                 neighbours.add(bubbles.get(row - 1).get(col + 1));
             }
             //LOWER LEFT
-            if (bubbles.get(row).isFull() && col > 0 && row < ROW_COUNT - 1) {
+            if (bubbles.get(row).isFullFlag() && col > 0 && row < ROW_COUNT - 1) {
                 neighbours.add(bubbles.get(row + 1).get(col - 1));
             }
-            if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
+            if (!bubbles.get(row).isFullFlag() && row < ROW_COUNT - 1) {
                 neighbours.add(bubbles.get(row + 1).get(col));
             }
             //LOWER RIGHT
-            if (bubbles.get(row).isFull() && col < COL_COUNT_FULL - 1 && row < ROW_COUNT - 1) {
+            if (bubbles.get(row).isFullFlag() && col < COL_COUNT_FULL - 1 && row < ROW_COUNT - 1) {
                 neighbours.add(bubbles.get(row + 1).get(col));
             }
-            if (!bubbles.get(row).isFull() && row < ROW_COUNT - 1) {
+            if (!bubbles.get(row).isFullFlag() && row < ROW_COUNT - 1) {
                 neighbours.add(bubbles.get(row + 1).get(col + 1));
             }
             return neighbours;
