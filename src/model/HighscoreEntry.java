@@ -25,7 +25,8 @@ public class HighscoreEntry implements Serializable, Comparable<HighscoreEntry>,
 		this.rows = rows;
 		this.color = color;
 	}
-	
+
+
 	/**
 	 * getter for the name
 	 * @return the name of the player

@@ -399,7 +399,7 @@ public class Game implements ActionListener {
             removeMarked();
         }
         unMarkAll();
-        score += ret * SCORE_COHERENT;
+        score += (long) ret * SCORE_COHERENT;
         return ret;
     }
 
@@ -419,7 +419,7 @@ public class Game implements ActionListener {
         int ret = countMarked();
         removeMarked();
         unMarkAll();
-        score += ret * SCORE_FLOATING;
+        score += (long) ret * SCORE_FLOATING;
         return ret;
     }
 
