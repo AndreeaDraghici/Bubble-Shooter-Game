@@ -1,4 +1,6 @@
-package model;
+package model.score;
+
+import model.score.HighscoreEntry;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

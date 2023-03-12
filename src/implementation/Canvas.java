@@ -1,8 +1,8 @@
 package implementation;
 
 import model.Game;
-import model.HighscoreEntry;
-import model.Highscores;
+import model.score.HighscoreEntry;
+import model.score.Highscores;
 import utils.Constants;
 
 import java.awt.BorderLayout;
@@ -34,6 +34,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import static utils.Constants.BUBBLE_SHOOTER_SCORE_TEXT;
+
 public class Canvas extends JPanel implements
         MouseMotionListener, MouseListener, ActionListener {
 
@@ -48,7 +50,6 @@ public class Canvas extends JPanel implements
     private Highscores highscores;
     private JTable highscoreTable;
     private JScrollPane scrollPane;
-    private static final String fileName = "bubble_shooter_score.text";
 
     /**
      * constructor for the class. sets of the table that displayes
@@ -190,11 +191,11 @@ public class Canvas extends JPanel implements
      */
     private void saveHighscores() {
         try {
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fileName));
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(BUBBLE_SHOOTER_SCORE_TEXT));
             os.writeObject(highscores);
             os.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Failed to save highscores!");
         }
     }
 
@@ -204,14 +205,14 @@ public class Canvas extends JPanel implements
      */
     private void loadHighscores() {
         try {
-            File f = new File("bubble_shooter_score.text");
-            if (f.exists()) {
-                ObjectInputStream os = new ObjectInputStream(new FileInputStream(fileName));
+            File file = new File(BUBBLE_SHOOTER_SCORE_TEXT);
+            if (file.exists()) {
+                ObjectInputStream os = new ObjectInputStream(new FileInputStream(file));
                 highscores = (Highscores) os.readObject();
                 os.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Failed to load highscores!");
         }
     }
 

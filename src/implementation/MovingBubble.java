@@ -10,8 +10,8 @@ public class MovingBubble extends Bubble {
     private boolean moving;
     private double step_x;
     private double step_y;
-    private double loc_x;
-    private double loc_y;
+    private double coordinate_x;
+    private double coordinate_y;
     private static double STEP = 5;
 
 
@@ -26,8 +26,8 @@ public class MovingBubble extends Bubble {
     public MovingBubble(Bubble b, Point dir) {
         super(b.getColor());
         loc = new Point(b.getLocation());
-        loc_x = loc.x;
-        loc_y = loc.y;
+        coordinate_x = loc.x;
+        coordinate_y = loc.y;
         setVisible(true);
         moving = true;
         double offset_x = dir.x - Constants.FIELD_SIZE_X / 2;
@@ -60,17 +60,17 @@ public class MovingBubble extends Bubble {
      * the wall if it collides woth it
      */
     public void move() {
-        if (loc_x + step_x < 0) {
-            loc_x = (int) -(loc_x + step_x);
+        if (coordinate_x + step_x < 0) {
+            coordinate_x = (int) -(coordinate_x + step_x);
             step_x = -step_x;
-        } else if (loc_x + step_x > Constants.FIELD_SIZE_X - 1 - 2 * (Bubble.RADIUS + 1)) {
-            loc_x = (int) ((Constants.FIELD_SIZE_X - 1 - 2 * (Bubble.RADIUS + 1)) * 2 - (loc_x + step_x));
+        } else if (coordinate_x + step_x > Constants.FIELD_SIZE_X - 1 - 2 * (Bubble.RADIUS + 1)) {
+            coordinate_x = (int) ((Constants.FIELD_SIZE_X - 1 - 2 * (Bubble.RADIUS + 1)) * 2 - (coordinate_x + step_x));
             step_x = -step_x;
         } else
-            loc_x += step_x;
-        loc_y += step_y;
-        loc.x = (int) loc_x;
-        loc.y = (int) loc_y;
+            coordinate_x += step_x;
+        coordinate_y += step_y;
+        loc.x = (int) coordinate_x;
+        loc.y = (int) coordinate_y;
     }
 
 }

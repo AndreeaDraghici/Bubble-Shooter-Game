@@ -20,13 +20,10 @@ import javax.swing.SwingConstants;
 
 public class SettingsPanel extends JPanel {
 
-    private MainFrame mainFrame;
+    private final MainFrame mainFrame;
     private JLabel scoreLabel;
-    private JPanel lowerPanel;
     private JSpinner rowsSpinner;
     private JSpinner colorSpinner;
-    private JButton newGameButton;
-    private JButton stopGameButton;
 
     /**
      * constructor, initiates the panel and sets the parameter
@@ -42,7 +39,7 @@ public class SettingsPanel extends JPanel {
 
     /**
      * initiates the components of the panel and sets the look
-     * and the actionlisteners
+     * and the action listeners
      */
     public void initComponents() {
         scoreLabel = new JLabel("0", SwingConstants.CENTER);
@@ -50,22 +47,22 @@ public class SettingsPanel extends JPanel {
         scoreLabel.setPreferredSize(new Dimension(Constants.WINDOW_SIZE_X - Constants.FIELD_SIZE_X - 5, 50));
         scoreLabel.setFont(new Font(scoreLabel.getFont().getName(), Font.BOLD, 34));
 
-        lowerPanel = new JPanel();
+        JPanel lowerPanel = new JPanel();
         lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
 
 
         JPanel rowsPanel = new JPanel();
         rowsPanel.setPreferredSize(new Dimension(Constants.WINDOW_SIZE_X - Constants.FIELD_SIZE_X - 5, 50));
         rowsPanel.setLayout(new BorderLayout());
-        SpinnerModel rowsModell = new SpinnerNumberModel(7, 3, 15, 1);
-        rowsSpinner = new JSpinner(rowsModell);
+        SpinnerModel rowsModel = new SpinnerNumberModel(7, 3, 15, 1);
+        rowsSpinner = new JSpinner(rowsModel);
 
         JPanel colorPanel = new JPanel();
         colorPanel.setPreferredSize(new Dimension(Constants.WINDOW_SIZE_X - Constants.FIELD_SIZE_X - 5, 50));
         colorPanel.setLayout(new BorderLayout());
 
-        SpinnerModel colorModell = new SpinnerNumberModel(4, 2, 8, 1);
-        colorSpinner = new JSpinner(colorModell);
+        SpinnerModel spinnerNumberModel = new SpinnerNumberModel(4, 2, 8, 1);
+        colorSpinner = new JSpinner(spinnerNumberModel);
         JLabel colorLabel = new JLabel("INITIAL COLORS");
         colorLabel.setFont(new Font(colorLabel.getFont().getName(), Font.CENTER_BASELINE, 14));
         colorLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 10));
@@ -74,11 +71,11 @@ public class SettingsPanel extends JPanel {
         colorPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
 
         JPanel buttonPanel = new JPanel();
-        newGameButton = new JButton("New Game");
+        JButton newGameButton = new JButton("New Game");
         newGameButton.setActionCommand("NEW GAME");
         newGameButton.addActionListener(mainFrame);
 
-        stopGameButton = new JButton("Stop Game");
+        JButton stopGameButton = new JButton("Stop Game");
         stopGameButton.setActionCommand("STOP GAME");
         stopGameButton.addActionListener(mainFrame);
         buttonPanel.add(newGameButton);
@@ -88,9 +85,9 @@ public class SettingsPanel extends JPanel {
         lowerPanel.add(colorPanel);
         lowerPanel.add(buttonPanel);
 
-        JPanel spaceholder = new JPanel();
-        spaceholder.setPreferredSize(new Dimension(Constants.WINDOW_SIZE_X - Constants.FIELD_SIZE_X - 5, 340));
-        lowerPanel.add(spaceholder);
+        JPanel spaceHolder = new JPanel();
+        spaceHolder.setPreferredSize(new Dimension(Constants.WINDOW_SIZE_X - Constants.FIELD_SIZE_X - 5, 340));
+        lowerPanel.add(spaceHolder);
         add(scoreLabel, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.CENTER);
     }
