@@ -1,5 +1,6 @@
 package implementation;
 
+import implementation.joystick.InputSignal;
 import utils.Constants;
 
 import java.awt.Color;
@@ -7,13 +8,14 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
-public class Arrow {
+public class Arrow extends InputSignal{
 
     private Point point;
     private static final int TIP_LENGTH = 50;
     private static final int LENGTH = 100;
 
     public Arrow() {
+        super();
         point = new Point(Constants.FIELD_SIZE_X / 2, 0);
     }
 
@@ -25,6 +27,7 @@ public class Arrow {
     public void paintComponent(Graphics2D graphics, Point coordinate) {
 
         graphics.setColor(Color.MAGENTA);
+
         Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
 
         int x = mouseLocation.x - coordinate.x;
